@@ -1,12 +1,19 @@
 package com.alexc.gameimportservice.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class Game {
+    @JsonProperty("id")
     private Long rawgId;
+    @JsonProperty("slug")
     private String slug;
+    @JsonProperty("name")
     private String title;
+    @JsonProperty("description_raw")
     private String description;
+    @JsonProperty("tags")
     private List<Tag> tagList;
 
     public Game() {

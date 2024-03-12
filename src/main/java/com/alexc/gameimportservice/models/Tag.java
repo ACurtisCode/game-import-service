@@ -1,9 +1,15 @@
 package com.alexc.gameimportservice.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Tag  {
+    @JsonProperty("id")
     private Long id;
+    @JsonProperty("slug")
     private String slug;
+    @JsonProperty("language")
     private String language;
+    @JsonProperty("name")
     private String name;
 
     public Tag() {

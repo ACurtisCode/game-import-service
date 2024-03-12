@@ -1,5 +1,7 @@
 package com.alexc.gameimportservice.resources;
 
+import com.alexc.gameimportservice.models.Game;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +18,13 @@ public class GameResource {
 
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @RequestMapping("/{id}")
-    public Object getGames(@PathVariable("id") String id) {
-        return restTemplate.getForObject("https://api.rawg.io/api/games/" + id + "?key=" + apiKey, Object.class);
+    public Game getGames(@PathVariable("id") String id) {
+        Game returnedGame = restTemplate.getForObject("https://api.rawg.io/api/games/" + id + "?key=" + apiKey, Game.class);
+
+        return returnedGame;
     }
 }
