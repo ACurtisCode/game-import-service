@@ -15,8 +15,28 @@ public class Game {
     private String description;
     @JsonProperty("tags")
     private List<Tag> tagList;
+    @JsonProperty("genres")
+    private List<Genre> genreList;
+    @JsonProperty("developers")
+    private List<Developer> developerList;
 
     public Game() {
+    }
+
+    public List<Developer> getDeveloperList() {
+        return developerList;
+    }
+
+    public void setDeveloperList(List<Developer> developerList) {
+        this.developerList = developerList;
+    }
+
+    public List<Genre> getGenreList() {
+        return genreList;
+    }
+
+    public void setGenreList(List<Genre> genreList) {
+        this.genreList = genreList;
     }
 
     public Long getRawgId() {
