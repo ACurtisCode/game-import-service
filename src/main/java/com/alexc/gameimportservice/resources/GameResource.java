@@ -17,8 +17,6 @@ public class GameResource {
 
     @Autowired
     private RestTemplate restTemplate;
-    @Autowired
-    private ObjectMapper objectMapper;
 
     //return single game by id or slug
     @GetMapping("/{id}")
@@ -36,44 +34,44 @@ public class GameResource {
     }
 
     //return list of games based on tags either 1,3 or MMO,Multiplayer
-    @GetMapping("/")
-    public List<Game> searchByTag(@RequestParam(required = true) String tag) {
-        GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&tag=" + tag + "&stores=1", GameList.class);
-        List<Game> games = returnedGames.getGameList();
-        return games;
-    }
+//    @GetMapping("/")
+//    public List<Game> searchByTag(@RequestParam(required = true) String tag) {
+//        GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&tag=" + tag + "&stores=1", GameList.class);
+//        List<Game> games = returnedGames.getGameList();
+//        return games;
+//    }
 
     //return list of games based on genres either 1,3 or indie,action
-    @GetMapping("/")
-    public List<Game> searchByGenre(@RequestParam(required = true) String genre) {
-        GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&genre=" + genre + "&stores=1", GameList.class);
-        List<Game> games = returnedGames.getGameList();
-        return games;
-    }
+//    @GetMapping("/")
+//    public List<Game> searchByGenre(@RequestParam(required = true) String genre) {
+//        GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&genre=" + genre + "&stores=1", GameList.class);
+//        List<Game> games = returnedGames.getGameList();
+//        return games;
+//    }
 
     //return list of games based on developers either 1,3 or valve-software,ea-games
-    @GetMapping("/")
-    public List<Game> searchByDeveloper(@RequestParam(required = true) String developer) {
-        GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&developers=" + developer + "&stores=1", GameList.class);
-        List<Game> games = returnedGames.getGameList();
-        return games;
-    }
+//    @GetMapping("/")
+//    public List<Game> searchByDeveloper(@RequestParam(required = true) String developer) {
+//        GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&developers=" + developer + "&stores=1", GameList.class);
+//        List<Game> games = returnedGames.getGameList();
+//        return games;
+//    }
 
     //return list of games based on genres either 1,3 or indie,action and tags either 1,3 or MMO,Multiplayer
-    @GetMapping("/")
-    public List<Game> searchByGenreTag(@RequestParam(required = true) String genre, @RequestParam(required = true) String tag) {
-        GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&genre=" + genre + "&tag=" + tag +"&stores=1", GameList.class);
-        List<Game> games = returnedGames.getGameList();
-        return games;
-    }
+//    @GetMapping("/")
+//    public List<Game> searchByGenreTag(@RequestParam(required = true) String genre, @RequestParam(required = true) String tag) {
+//        GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&genre=" + genre + "&tag=" + tag +"&stores=1", GameList.class);
+//        List<Game> games = returnedGames.getGameList();
+//        return games;
+//    }
 
     //return list of games based on genres either 1,3 or indie,action and tags either 1,3 or MMO,Multiplayer and developers either 1,3 or valve-software,ea-games
-    @GetMapping("/")
-    public List<Game> searchByGenreTagDeveloper(@RequestParam(required = true) String genre, @RequestParam(required = true) String tag, @RequestParam(required = true) String developer) {
-        GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&genre=" + genre + "&tag=" + tag + "&developers=" + developer + "&stores=1", GameList.class);
-        List<Game> games = returnedGames.getGameList();
-        return games;
-    }
+//    @GetMapping("/")
+//    public List<Game> searchByGenreTagDeveloper(@RequestParam(required = true) String genre, @RequestParam(required = true) String tag, @RequestParam(required = true) String developer) {
+//        GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&genre=" + genre + "&tag=" + tag + "&developers=" + developer + "&stores=1", GameList.class);
+//        List<Game> games = returnedGames.getGameList();
+//        return games;
+//    }
 
     //return tags of game by id or slug
     @GetMapping("/{id}/tags")

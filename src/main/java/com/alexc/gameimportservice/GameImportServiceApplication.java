@@ -18,9 +18,5 @@ public class GameImportServiceApplication {
         return new RestTemplate();
     }
 
-    @Bean
-    public ObjectMapper getObjectMapper() {
-        return new ObjectMapper();
-    }
 
 }
