@@ -27,13 +27,18 @@ public class GameResource {
 
     //return list of games based on partial title
     @GetMapping("/")
-    public List<Game> searchGames(@RequestParam(required = true) String title) {
+    public List<Game> searchGames(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String tag,
+            @RequestParam(required = false) String genre,
+            @RequestParam(required = false) String developer
+            ) {
         GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&search=" + title + "&stores=1", GameList.class);
         List<Game> games = returnedGames.getGameList();
         return games;
     }
 
-    //return list of games based on tags either 1,3 or MMO,Multiplayer
+//    return list of games based on tags either 1,3 or MMO,Multiplayer
 //    @GetMapping("/")
 //    public List<Game> searchByTag(@RequestParam(required = true) String tag) {
 //        GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&tag=" + tag + "&stores=1", GameList.class);
