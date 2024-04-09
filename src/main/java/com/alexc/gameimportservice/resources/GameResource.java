@@ -1,20 +1,24 @@
 package com.alexc.gameimportservice.resources;
 
 import com.alexc.gameimportservice.models.*;
+import com.alexc.gameimportservice.services.GameService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/games")
 public class GameResource {
     @Value("${api.key}")
     private String apiKey;
-
+    @Autowired
+    GameService gameServ;
     @Autowired
     private RestTemplate restTemplate;
 
@@ -27,13 +31,29 @@ public class GameResource {
 
     //return list of games based on partial title
     @GetMapping("/")
+    @ResponseBody
     public List<Game> searchGames(
-            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String search,
             @RequestParam(required = false) String tag,
             @RequestParam(required = false) String genre,
             @RequestParam(required = false) String developer
             ) {
-        GameList returnedGames = restTemplate.getForObject("https://api.rawg.io/api/games?key=" + apiKey + "&search=" + title + "&stores=1", GameList.class);
+        Map<String, String> searchTerms = new HashMap<>();
+        if(search != null && !search.isEmpty()){
+            searchTerms.put("search", search);
+        }
+        if(tag != null && !tag.isEmpty()){
+            searchTerms.put("tags", tag);
+        }
+        if(genre != null && !genre.isEmpty()){
+            searchTerms.put("genres", genre);
+        }
+        if(developer != null && !developer.isEmpty()){
+            searchTerms.put("developers", developer);
+        }
+        System.out.println(searchTerms.toString());
+        String url = gameServ.UrlBuilder(searchTerms);
+        GameList returnedGames = restTemplate.getForObject(url, GameList.class);
         List<Game> games = returnedGames.getGameList();
         return games;
     }
