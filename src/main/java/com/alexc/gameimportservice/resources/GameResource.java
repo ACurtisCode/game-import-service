@@ -5,6 +5,9 @@ import com.alexc.gameimportservice.services.GameService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -53,8 +56,15 @@ public class GameResource {
         }
         System.out.println(searchTerms.toString());
         String url = gameServ.UrlBuilder(searchTerms);
+        System.out.println(url);
+        Object response = restTemplate.getForObject(url, Object.class);
+        System.out.println(response);
+        //Game[] games = response.getBody();
         GameList returnedGames = restTemplate.getForObject(url, GameList.class);
         List<Game> games = returnedGames.getGameList();
+//        for(Game game : games) {
+//            System.out.println(game.getTitle());
+//        }
         return games;
     }
 

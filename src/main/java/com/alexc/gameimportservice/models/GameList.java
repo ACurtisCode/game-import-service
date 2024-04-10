@@ -7,6 +7,7 @@ public class GameList {
     private List<Game> gameList;
 
     public GameList() {
+        gameList = new ArrayList<>();
     }
 
     public List<Game> getGameList() {
