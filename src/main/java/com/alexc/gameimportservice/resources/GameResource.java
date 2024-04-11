@@ -57,14 +57,10 @@ public class GameResource {
         System.out.println(searchTerms.toString());
         String url = gameServ.UrlBuilder(searchTerms);
         System.out.println(url);
-        Object response = restTemplate.getForObject(url, Object.class);
-        System.out.println(response);
-        //Game[] games = response.getBody();
+
         GameList returnedGames = restTemplate.getForObject(url, GameList.class);
         List<Game> games = returnedGames.getGameList();
-//        for(Game game : games) {
-//            System.out.println(game.getTitle());
-//        }
+        System.out.println(games.toString());
         return games;
     }
 
